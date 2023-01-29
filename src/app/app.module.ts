@@ -20,11 +20,17 @@ import { environment } from '../environments/environment';
 //*****************Component**************************/
 
 import { ButtonModule } from 'primeng/button';
+import { PackingListsComponent } from './packing-lists/packing-lists.component';
+import { PackingListComponent } from './packing-lists/packing-list/packing-list.component';
+import { PackinglistsComponent } from './packinglists/packinglists.component';
+import { PackingViewComponent } from './packing-lists/packing-view/packing-view.component';
+import { PackingListViewComponent } from './packing-lists/packing-list-view/packing-list-view.component';
+import { PackingListAddComponent } from './packing-lists/packing-list-add/packing-list-add.component';
 
 //*****************Component**************************/
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PackingListsComponent, PackingListComponent, PackinglistsComponent, PackingViewComponent, PackingListViewComponent, PackingListAddComponent],
   imports: [
     //core
     AppRoutingModule,
