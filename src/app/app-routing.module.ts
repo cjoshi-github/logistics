@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddTutorialComponent } from './crud/components/add-tutorial/add-tutorial.component';
+import { TutorialsListComponent } from './crud/components/tutorials-list/tutorials-list.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: 'tutorials', component: TutorialsListComponent },
+  { path: 'add', component: AddTutorialComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
