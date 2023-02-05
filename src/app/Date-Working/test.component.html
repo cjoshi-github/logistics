@@ -1,19 +1,37 @@
-<form (ngSubmit)="sendData()">
+<form #myForm="ngForm" (ngSubmit)="saveData(myForm)">
 
-    <p-calendar [(ngModel)]="dateUI" name="date" dateFormat="dd-mm-yy"></p-calendar>
+    <p-calendar ngModel name="docDate" dateFormat="dd-mm-yy" placeholder="Doc Date"></p-calendar><br>
+    <input type="text" pInputText ngModel name="plNo" placeholder="Pl No"/><br>
+    <input type="text" pInputText ngModel name="shipFrom" placeholder="Ship From"/><br>
+    <input type="text" pInputText ngModel name="shipTo" placeholder="Ship To"/><br>
 
     <br>
 
-    
+
+
     <button type="submit">Send</button>
 
 
     <hr>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Document Date</th>
+                <th scope="col">PL No</th>
+                <th scope="col">Ship From</th>
+                <th scope="col">Ship To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let packing of packingLists; let i = index" >
+                <th scope="row">{{i+1}}</th>
+                <td>{{packing.docDate | date: "dd-MM-yyyy"}}</td>
+                <td>{{packing.plNo}}</td>
+                <td>{{packing.shipFrom}}</td>
+                <td>{{packing.shipTo}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-     <ul>
-        <li *ngFor="let item of dataList">
-            {{item.key | json }} && {{item.dateString | json}}
-        </li>
-     </ul>
-    
 </form>
