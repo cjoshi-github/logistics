@@ -1,45 +1,38 @@
-<form #myForm="ngForm" (ngSubmit)="saveData(myForm)">
+<form #myForm="ngForm" (ngSubmit)="saveData(myForm)" style="margin: 50px;">
 
-    <p-calendar ngModel name="docDate" dateFormat="dd-mm-yy" placeholder="Doc Date"></p-calendar><br>
-    <input type="text" pInputText ngModel name="plNo" placeholder="Pl No"/><br>
-    <p-dropdown [options]="shipFrom" ngModel name="shipFrom" optionLabel="name"></p-dropdown>
-    <p-dropdown [options]="shipTo" ngModel name="shipTo" optionLabel="name"></p-dropdown>
-    <p-chips ngModel separator="," placeholder="Brands" name="brandNames"></p-chips><br>
-    <p-inputNumber ngModel name="packQty" inputId="integeronly"></p-inputNumber>
-    <p-inputNumber ngModel name="qty" inputId="integeronly"></p-inputNumber>
-    <p-inputNumber ngModel name="ctns" inputId="integeronly"></p-inputNumber>
-    <p-inputNumber ngModel name="plts" inputId="integeronly"></p-inputNumber>
-    <p-inputNumber ngModel name="weight" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="3">
-    </p-inputNumber>
+    <p-calendar [(ngModel)]="packingList.docDate" name="docDate" dateFormat="dd-mm-yy" placeholder="Doc Date"></p-calendar><br>
+    <input type="text" pInputText [(ngModel)]="packingList.plNo" name="plNo" placeholder="Pl No"/><br>
+    <p-dropdown [options]="shipFrom" [(ngModel)]="packingList.shipFrom" name="shipFrom" optionLabel="name"></p-dropdown>
+    <p-dropdown [options]="shipTo" [(ngModel)]="packingList.shipTo" name="shipTo" optionLabel="name"></p-dropdown>
+    <p-chips [(ngModel)]="packingList.brandNames" separator="," placeholder="Brands" name="brandNames"></p-chips><br>
+    <p-inputNumber [(ngModel)]="packingList.packQty" name="packQty" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="packingList.qty" name="qty" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="packingList.ctns" name="ctns" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="packingList.plts" name="plts" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="packingList.weight" name="weight" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="3"></p-inputNumber><br>
+    <button pButton type="submit" label="Add Packinglist"></button><hr>
 
-
-    <br>
-
-
-
-    <button type="submit">Send</button>
-
-
-    <hr>
-    <table class="table table-striped ">
-        <thead>
+    <p-table [value]="packingLists" [tableStyle]="{'min-width': '50rem'}" styleClass="p-datatable-sm" 
+    selectionMode="single" [(selection)]="selectedPL" (onRowSelect)="getSelectedValue()" (onRowUnselect)="clearSelected()"
+    [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">PL No</th>
-                <th scope="col">Brands</th>
-                <th scope="col">Ship From</th>
-                <th scope="col">Ship To</th>
-                <th scope="col">Document Date</th>
-                <th scope="col">Pack Qty</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Cartons</th>
-                <th scope="col">Pallets</th>
-                <th scope="col">Weight</th>
+                <th>#</th>
+                <th pSortableColumn="plNo">PL No <p-sortIcon field="plNo"></p-sortIcon></th>
+                <th>Brands</th>
+                <th pSortableColumn="shipFrom.name">Ship From <p-sortIcon field="shipFrom"></p-sortIcon></th>
+                <th pSortableColumn="shipTo.name">Ship To <p-sortIcon field="shipTo"></p-sortIcon></th>
+                <th pSortableColumn="docDate">Document Date <p-sortIcon field="docDate"></p-sortIcon></th>
+                <th>Pack Qty</th>
+                <th>Qty</th>
+                <th>Cartons</th>
+                <th>Pallets</th>
+                <th>Weight</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let packing of packingLists; let i = index" >
-                <th scope="row">{{i+1}}</th>
+        </ng-template>
+        <ng-template pTemplate="body" let-packing let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="packing">
+                <td>{{ rowIndex+1 }}</td>
                 <td>{{packing.plNo}}</td>
                 <td>{{packing.brandNames?.toString()}}</td>
                 <td>{{packing.shipFrom?.name}}</td>
@@ -51,6 +44,6 @@
                 <td>{{packing.plts}}</td>
                 <td>{{packing.weight}}</td>
             </tr>
-        </tbody>
-    </table>
+        </ng-template>
+    </p-table>
 </form>

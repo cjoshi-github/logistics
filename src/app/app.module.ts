@@ -33,6 +33,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import {TableModule} from 'primeng/table';
 import { CrudModule } from './crud/crud.module';
 import { TestComponent } from './Date-Working/test.component';
 
@@ -74,6 +75,7 @@ import { TestComponent } from './Date-Working/test.component';
     MultiSelectModule,
     SelectButtonModule,
     CrudModule,
+    TableModule
   ],
   providers: [],
   
