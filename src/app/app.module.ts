@@ -34,6 +34,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CrudModule } from './crud/crud.module';
+import { TestComponent } from './Date-Working/test.component';
 
 
 //*****************Component**************************/
@@ -41,6 +42,7 @@ import { CrudModule } from './crud/crud.module';
 @NgModule({
   declarations: [
     AppComponent,
+    TestComponent,
   ],
   imports: [
     //core

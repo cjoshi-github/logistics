@@ -1,0 +1,19 @@
+<form (ngSubmit)="sendData()">
+
+    <p-calendar [(ngModel)]="dateUI" name="date" dateFormat="dd-mm-yy"></p-calendar>
+
+    <br>
+
+    
+    <button type="submit">Send</button>
+
+
+    <hr>
+
+     <ul>
+        <li *ngFor="let item of dataList">
+            {{item.key | json }} && {{item.dateString | json}}
+        </li>
+     </ul>
+    
+</form>
