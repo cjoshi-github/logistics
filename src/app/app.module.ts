@@ -33,7 +33,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { PackinglistModule } from './packinglist/packinglist.module';
 import { CrudModule } from './crud/crud.module';
 
 
@@ -51,7 +50,6 @@ import { CrudModule } from './crud/crud.module';
     RippleModule,
     FormsModule,
     ReactiveFormsModule,
-    PackinglistModule,
 
     // Firebase
     AngularFireModule.initializeApp(environment.firebase),
