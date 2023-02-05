@@ -1,10 +1,12 @@
+import { Address } from "../utils/shipFrom.utils";
+
 export class PackingList {
   key?: String | null;
   docDate?: Date;
   plNo?: String;
-  shipFrom?: String;
-  shipTo?: String;
-  brandName?: String[];
+  shipFrom?: Address;
+  shipTo?: Address;
+  brandNames?: String[];
   packQty?: number;
   qty?: number;
   ctns?: number;

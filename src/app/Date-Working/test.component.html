@@ -2,8 +2,16 @@
 
     <p-calendar ngModel name="docDate" dateFormat="dd-mm-yy" placeholder="Doc Date"></p-calendar><br>
     <input type="text" pInputText ngModel name="plNo" placeholder="Pl No"/><br>
-    <input type="text" pInputText ngModel name="shipFrom" placeholder="Ship From"/><br>
-    <input type="text" pInputText ngModel name="shipTo" placeholder="Ship To"/><br>
+    <p-dropdown [options]="shipFrom" ngModel name="shipFrom" optionLabel="name"></p-dropdown>
+    <p-dropdown [options]="shipTo" ngModel name="shipTo" optionLabel="name"></p-dropdown>
+    <p-chips ngModel separator="," placeholder="Brands" name="brandNames"></p-chips><br>
+    <p-inputNumber ngModel name="packQty" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber ngModel name="qty" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber ngModel name="ctns" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber ngModel name="plts" inputId="integeronly"></p-inputNumber>
+    <p-inputNumber ngModel name="weight" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="3">
+    </p-inputNumber>
+
 
     <br>
 
@@ -17,21 +25,32 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Document Date</th>
                 <th scope="col">PL No</th>
+                <th scope="col">Brands</th>
                 <th scope="col">Ship From</th>
                 <th scope="col">Ship To</th>
+                <th scope="col">Document Date</th>
+                <th scope="col">Pack Qty</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Cartons</th>
+                <th scope="col">Pallets</th>
+                <th scope="col">Weight</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let packing of packingLists; let i = index" >
                 <th scope="row">{{i+1}}</th>
-                <td>{{packing.docDate | date: "dd-MM-yyyy"}}</td>
                 <td>{{packing.plNo}}</td>
-                <td>{{packing.shipFrom}}</td>
-                <td>{{packing.shipTo}}</td>
+                <td>{{packing.brandNames?.toString()}}</td>
+                <td>{{packing.shipFrom?.name}}</td>
+                <td>{{packing.shipTo?.name}}</td>
+                <td>{{packing.docDate | date: "dd-MM-yyyy"}}</td>
+                <td>{{packing.packQty}}</td>
+                <td>{{packing.qty}}</td>
+                <td>{{packing.ctns}}</td>
+                <td>{{packing.plts}}</td>
+                <td>{{packing.weight}}</td>
             </tr>
         </tbody>
     </table>
-
 </form>
