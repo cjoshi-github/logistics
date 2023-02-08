@@ -35,7 +35,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import {TableModule} from 'primeng/table';
 import { CrudModule } from './crud/crud.module';
-import { TestComponent } from './Date-Working/test.component';
+import { PackingComponent } from './packing/packing.component';
 
 
 //*****************Component**************************/
@@ -43,7 +43,7 @@ import { TestComponent } from './Date-Working/test.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
+    PackingComponent,
   ],
   imports: [
     //core

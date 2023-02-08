@@ -1,0 +1,253 @@
+<form
+  #myForm="ngForm"
+  (ngSubmit)="createPackingList(myForm)"
+  style="margin: 50px"
+  class="p-card p-3"
+>
+  <div class="flex justify-content-center mb-3">
+    <h4>Packing Lists</h4>
+  </div>
+  <div class="p-fluid grid formgrid">
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-calendar
+          [(ngModel)]="packingList.docDate"
+          name="docDate"
+          dateFormat="dd-mm-yy"
+        ></p-calendar>
+        <label for="inputtext">Document Date</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="packingList.plNo"
+          name="plNo"
+        /><br />
+        <label for="inputtext">Packing List #</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-chips
+          [(ngModel)]="packingList.brandNames"
+          separator=","
+          name="brandNames"
+          [showClear]="true"
+        ></p-chips>
+        <label for="inputtext">Brands</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="shipFrom"
+          [(ngModel)]="packingList.shipFrom"
+          name="shipFrom"
+          optionLabel="name"
+          [autoDisplayFirst]="false"
+          [showClear]="true"
+        ></p-dropdown>
+        <label for="inputtext">Ship From</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="shipTo"
+          [(ngModel)]="packingList.shipTo"
+          name="shipTo"
+          optionLabel="name"
+          [autoDisplayFirst]="false"
+          [showClear]="true"
+        ></p-dropdown>
+        <label for="inputtext">Ship To</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="packingList.packQty"
+          name="packQty"
+          inputId="integeronly"
+        ></p-inputNumber>
+        <label for="inputtext">Packing Qty</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="packingList.qty"
+          name="qty"
+          inputId="integeronly"
+        ></p-inputNumber>
+        <label for="inputtext">Quantity</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="packingList.ctns"
+          name="ctns"
+          inputId="integeronly"
+        ></p-inputNumber>
+        <label for="inputtext">Cartons</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="packingList.plts"
+          name="plts"
+          inputId="integeronly"
+        ></p-inputNumber>
+        <label for="inputtext">Pallets</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="packingList.weight"
+          name="weight"
+          inputId="minmaxfraction"
+          mode="decimal"
+          [minFractionDigits]="2"
+          [maxFractionDigits]="3"
+        ></p-inputNumber>
+        <label for="inputtext">Weight</label>
+      </span>
+    </div>
+  </div>
+  <div class="flex gap-3 justify-content-end pb-5">
+    <button
+      pButton
+      pRipple
+      type="submit"
+      label="Create"
+      icon="pi pi-pencil"
+      class="w-1 p-button-raised p-button-text"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Update"
+      icon="pi pi-replay"
+      class="w-1 p-button-raised p-button-text p-button-plain"
+      (click)="updatePackingList()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Delete"
+      icon="pi pi-times"
+      class="w-1 p-button-raised p-button-danger p-button-text"
+      (click)="deletePackingList()"
+    ></button>
+  </div>
+  <div>
+    <p-table
+      [value]="packingLists"
+      [(selection)]="selectedPackings"
+      dataKey="key"
+      [paginator]="true"
+      [rows]="5"
+      styleClass="p-datatable-sm"
+      (onRowSelect)="readSelectedPackingList($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="plNo">
+            PL No <p-sortIcon field="plNo"></p-sortIcon>
+          </th>
+          <th>Brands</th>
+          <th pSortableColumn="shipFrom.name">
+            Ship From <p-sortIcon field="shipFrom"></p-sortIcon>
+          </th>
+          <th pSortableColumn="shipTo.countryName">
+            Ship To <p-sortIcon field="shipTo"></p-sortIcon>
+          </th>
+          <th pSortableColumn="docDate">
+            Document Date <p-sortIcon field="docDate"></p-sortIcon>
+          </th>
+          <th>Pack Qty</th>
+          <th>Qty</th>
+          <th>Cartons</th>
+          <th>Pallets</th>
+          <th>Weight</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-packing>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="packing"></p-tableCheckbox>
+          </td>
+          <td>{{ packing.plNo }}</td>
+          <td>{{ packing.brandNames?.toString() }}</td>
+          <td>{{ packing.shipFrom?.name }}</td>
+          <td>{{ packing.shipTo?.name }}</td>
+          <!-- <td>{{packing.shipTo?.countryName}} </td> -->
+          <td>{{ packing.docDate | date : "dd-MM-yyyy" }}</td>
+          <td>{{ packing.packQty }}</td>
+          <td>{{ packing.qty }}</td>
+          <td>{{ packing.ctns }}</td>
+          <td>{{ packing.plts }}</td>
+          <td>{{ packing.weight }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</form>
+
+<!-- <p-table [value]="packingLists" [(selection)]="selectedPackingLists" [tableStyle]="{ 'min-width': '50rem' }"
+    styleClass="p-datatable-sm" selectionMode="single" [(selection)]="selectedPL" (onRowSelect)="getSelectedValue()"
+    (onRowUnselect)="clearSelected()" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+        <tr>
+            <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+            <th>#</th>
+            <th pSortableColumn="plNo">
+                PL No <p-sortIcon field="plNo"></p-sortIcon>
+            </th>
+            <th>Brands</th>
+            <th pSortableColumn="shipFrom.name">
+                Ship From <p-sortIcon field="shipFrom"></p-sortIcon>
+            </th>
+            <th pSortableColumn="shipTo.name">
+                Ship To <p-sortIcon field="shipTo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="docDate">
+                Document Date <p-sortIcon field="docDate"></p-sortIcon>
+            </th>
+            <th>Pack Qty</th>
+            <th>Qty</th>
+            <th>Cartons</th>
+            <th>Pallets</th>
+            <th>Weight</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-packing let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="packing">
+            <td>
+                <p-tableCheckbox [value]="packing"></p-tableCheckbox>
+            </td>
+            <td>{{ rowIndex + 1 }}</td>
+            <td>{{ packing.plNo }}</td>
+            <td>{{ packing.brandNames?.toString() }}</td>
+            <td>{{ packing.shipFrom?.name }}</td>
+            <td>{{ packing.shipTo?.name }}</td>
+            <td>{{ packing.docDate | date : "dd-MM-yyyy" }}</td>
+            <td>{{ packing.packQty }}</td>
+            <td>{{ packing.qty }}</td>
+            <td>{{ packing.ctns }}</td>
+            <td>{{ packing.plts }}</td>
+            <td>{{ packing.weight }}</td>
+        </tr>
+    </ng-template>
+</p-table> -->

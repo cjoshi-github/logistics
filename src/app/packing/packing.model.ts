@@ -1,6 +1,6 @@
 import { Address } from "../utils/shipFrom.utils";
 
-export class PackingList {
+export class Packing {
   key?: String | null;
   docDate?: Date;
   plNo?: String;
