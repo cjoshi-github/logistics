@@ -36,6 +36,13 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import {TableModule} from 'primeng/table';
 import { CrudModule } from './crud/crud.module';
 import { PackingComponent } from './packing/packing.component';
+import { OracleComponent } from './oracle/oracle.component';
+import {RatingModule} from 'primeng/rating';
+import {TreeTableModule} from 'primeng/treetable';
+import {TreeNode} from 'primeng/api';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { HeaderComponent } from './header/header.component';
+import { ShipmentComponent } from './shipment/shipment.component';
 
 
 //*****************Component**************************/
@@ -44,6 +51,10 @@ import { PackingComponent } from './packing/packing.component';
   declarations: [
     AppComponent,
     PackingComponent,
+    OracleComponent,
+    InvoiceComponent,
+    HeaderComponent,
+    ShipmentComponent
   ],
   imports: [
     //core
@@ -75,7 +86,10 @@ import { PackingComponent } from './packing/packing.component';
     MultiSelectModule,
     SelectButtonModule,
     CrudModule,
-    TableModule
+    TableModule,  
+    RatingModule,
+    TreeTableModule,
+    
   ],
   providers: [],
   

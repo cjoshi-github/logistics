@@ -1,0 +1,117 @@
+<form #myForm="ngForm" (ngSubmit)="createOracle(myForm)" style="margin: 50px" class="p-card p-3">
+  <div class="flex justify-content-center mb-3">
+    <h4>Oracle List</h4>
+  </div>
+  <div class="p-fluid grid formgrid">
+    <div class="field col-12">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="oracle.oracleNo" name="oracleNo" />
+        <label for="inputtext">Oracle #</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-multiSelect name="packingLists" [options]="packingLists" [(ngModel)]="selectedPacking"
+          optionLabel="plNo" optionValue="key"></p-multiSelect>
+        <label for="inputtext">Packing List</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="oracle.amount" name="amount" />
+        <label for="inputtext">Amount</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="oracle.vWeight" name="vWeight" />
+        <label for="inputtext">Volumetric Weight</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="oracle.cbm" name="cbm" />
+        <label for="inputtext">CBM (Cubic Meter)</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="oracle.disc" name="disc" />
+        <label for="inputtext">Item Description</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6 lg:col-4">
+      <span class="p-float-label">
+        <p-dropdown [options]="itemTypes" [(ngModel)]="selectedItemType" optionLabel="type"
+          name="itemType" optionValue="type"></p-dropdown>
+        <label for="inputtext">Item Type</label>
+      </span>
+    </div>
+  </div>
+
+
+  <div class="flex gap-3 justify-content-end pb-5">
+    <button pButton pRipple type="submit" label="Create" icon="pi pi-pencil"
+      class="w-1 p-button-raised p-button-text"></button>
+    <!-- <button pButton pRipple type="button" label="Update" icon="pi pi-replay"
+      class="w-1 p-button-raised p-button-text p-button-plain" (click)="updatePackingList()"></button>
+    <button pButton pRipple type="button" label="Delete" icon="pi pi-times"
+      class="w-1 p-button-raised p-button-danger p-button-text" (click)="deletePackingList()"></button> -->
+  </div>
+
+
+
+  <p-table [value]="oracleList" dataKey="oracleNo" [tableStyle]="{'min-width': '60rem'}" styleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 5rem"></th>
+            <th pSortableColumn="name">Oracle # <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="price">Amount<p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="category">CBM <p-sortIcon field="category"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-oracle let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="oracle" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+            <td>{{oracle.oracleNo}}</td>
+            <td>{{oracle.amount}}</td>
+            <td>{{oracle.cbm}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-oracle>
+        <tr>
+            <td colspan="7">
+                <div class="p-3">
+                    <p-table [value]="oracle.packingLists" dataKey="key">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="id">Packing List #<p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="qty">Qty <p-sortIcon field="customer"></p-sortIcon></th>
+                                <th pSortableColumn="weight">Weight <p-sortIcon field="date"></p-sortIcon></th>
+                                <th style="width: 4rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-packing>
+                            <tr>
+                                <td>{{packing.plNo}}</td>
+                                <td>{{packing.qty}}</td>
+                                <td>{{packing.weight}}</td>
+                                <td><p-button type="button" icon="pi pi-search"></p-button></td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">There are no order for this product yet.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+</form>

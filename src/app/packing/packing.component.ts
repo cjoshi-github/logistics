@@ -7,7 +7,7 @@ import { Utils } from '../utils/date.utils';
 import { PackingService } from './packing.service';
 
 @Component({
-  selector: 'app-test',
+  selector: 'app-packing',
   templateUrl: './packing.component.html',
   styleUrls: ['./packing.component.scss'],
 })
