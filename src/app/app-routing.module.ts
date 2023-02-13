@@ -8,7 +8,7 @@ import { PackingComponent } from './packing/packing.component';
 import { ShipmentComponent } from './shipment/shipment.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'packing', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'packing', component: PackingComponent },
   { path: 'oracle', component: OracleComponent },
   { path: 'invoice', component: InvoiceComponent },
