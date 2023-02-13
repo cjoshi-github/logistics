@@ -3,7 +3,7 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
-import { Packing } from './packing.model';
+import { Packing } from '../models/packing.model';
 
 @Injectable({
   providedIn: 'root',

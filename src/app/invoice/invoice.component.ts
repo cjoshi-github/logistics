@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Oracle } from '../oracle/oracle.model';
-import { OracleService } from '../oracle/oracle.service';
-import { Invoice } from './invoice.model';
-import { InvoiceService } from './invoice.service';
+import { Oracle } from '../models/oracle.model';
+import { OracleService } from '../shared/oracle.service';
+import { Invoice } from '../models/invoice.model';
+import { InvoiceService } from '../shared/invoice.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Utils } from '../utils/date.utils';
 

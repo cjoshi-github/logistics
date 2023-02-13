@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { map } from 'rxjs/internal/operators/map';
-import { Packing } from './packing.model';
+import { Packing } from '../models/packing.model';
 import { NgForm } from '@angular/forms';
 import { Address, Shipper } from '../utils/shipFrom.utils';
 import { Utils } from '../utils/date.utils';
-import { PackingService } from './packing.service';
+import { PackingService } from '../shared/packing.service';
 
 @Component({
   selector: 'app-packing',
@@ -15,10 +15,11 @@ export class PackingComponent {
 
   protected packingList: Packing = new Packing();
   protected packingLists: Packing[] = [];
-  protected selectedPackings: Packing[] = [];
 
   shipFrom: Address[] = [];
   shipTo: Address[] = [];
+  searchBy: string = '';
+  searchByValue: string = '';
 
   constructor(private database: PackingService) {
     this.shipFrom = new Shipper().getShipFrom();
@@ -38,11 +39,6 @@ export class PackingComponent {
     }); 
   }
 
-  readSelectedPackingList(event: any) {
-    this.packingList = event.data
-    this.packingList.docDate = Utils.anyToDate(event.data.docDate);
-  }
-
   createPackingList(form: NgForm) {
     this.packingList = form.value;
     this.packingList.docDate = form.value.docDate.toString();
@@ -58,8 +54,12 @@ export class PackingComponent {
 
   updatePackingList(){
     this.database.update(String(this.packingList.key), this.packingList)
+    this.clearForm();
   }
   clearForm() {
     this.packingList = {};
+  }
+  onRowSelect(event: any) {
+    this.packingList.docDate = Utils.anyToDate(event.data.docDate);
   }
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Packing } from '../packing/packing.model';
-import { PackingService } from '../packing/packing.service';
-import { Oracle } from './oracle.model';
+import { Packing } from '../models/packing.model';
+import { PackingService } from '../shared/packing.service';
+import { Oracle } from '../models/oracle.model';
 import { map } from 'rxjs/internal/operators/map';
-import { OracleService } from './oracle.service';
+import { OracleService } from '../shared/oracle.service';
 
 @Component({
   selector: 'app-oracle',

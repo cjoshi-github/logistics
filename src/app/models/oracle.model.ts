@@ -1,4 +1,4 @@
-import { Packing } from "../packing/packing.model";
+import { Packing } from "./packing.model";
 
 export class Oracle {
     key?: String | null;

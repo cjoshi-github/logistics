@@ -1,4 +1,4 @@
-<form #myForm="ngForm" (ngSubmit)="createPackingList(myForm)" style="margin: 50px" class="p-card p-3">
+<!-- <form #myForm="ngForm" (ngSubmit)="createPackingList(myForm)" style="margin: 50px" class="p-card p-3">
   <div class="flex justify-content-center mb-3">
     <h4>Packing Lists</h4>
   </div>
@@ -112,7 +112,6 @@
           <td>{{ packing.brandNames?.toString() }}</td>
           <td>{{ packing.shipFrom?.name }}</td>
           <td>{{ packing.shipTo?.name }}</td>
-          <!-- <td>{{packing.shipTo?.countryName}} </td> -->
           <td>{{ packing.docDate | date : "dd-MM-yyyy" }}</td>
           <td>{{ packing.packQty }}</td>
           <td>{{ packing.qty }}</td>
@@ -123,51 +122,153 @@
       </ng-template>
     </p-table>
   </div>
-</form>
+</form> -->
 
-<!-- <p-table [value]="packingLists" [(selection)]="selectedPackingLists" [tableStyle]="{ 'min-width': '50rem' }"
-    styleClass="p-datatable-sm" selectionMode="single" [(selection)]="selectedPL" (onRowSelect)="getSelectedValue()"
-    (onRowUnselect)="clearSelected()" [paginator]="true" [rows]="5">
-    <ng-template pTemplate="header">
-        <tr>
-            <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
-            <th>#</th>
-            <th pSortableColumn="plNo">
-                PL No <p-sortIcon field="plNo"></p-sortIcon>
-            </th>
-            <th>Brands</th>
-            <th pSortableColumn="shipFrom.name">
-                Ship From <p-sortIcon field="shipFrom"></p-sortIcon>
-            </th>
-            <th pSortableColumn="shipTo.name">
-                Ship To <p-sortIcon field="shipTo"></p-sortIcon>
-            </th>
-            <th pSortableColumn="docDate">
-                Document Date <p-sortIcon field="docDate"></p-sortIcon>
-            </th>
-            <th>Pack Qty</th>
-            <th>Qty</th>
-            <th>Cartons</th>
-            <th>Pallets</th>
-            <th>Weight</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-packing let-rowIndex="rowIndex">
-        <tr [pSelectableRow]="packing">
-            <td>
-                <p-tableCheckbox [value]="packing"></p-tableCheckbox>
-            </td>
-            <td>{{ rowIndex + 1 }}</td>
-            <td>{{ packing.plNo }}</td>
-            <td>{{ packing.brandNames?.toString() }}</td>
-            <td>{{ packing.shipFrom?.name }}</td>
-            <td>{{ packing.shipTo?.name }}</td>
-            <td>{{ packing.docDate | date : "dd-MM-yyyy" }}</td>
-            <td>{{ packing.packQty }}</td>
-            <td>{{ packing.qty }}</td>
-            <td>{{ packing.ctns }}</td>
-            <td>{{ packing.plts }}</td>
-            <td>{{ packing.weight }}</td>
-        </tr>
-    </ng-template>
-</p-table> -->
+<form #myForm="ngForm" (ngSubmit)="createPackingList(myForm)" class="px-3">
+  <div class="grid">
+    <div class="col-4 p-fluid">
+      <p-card>
+        <h3 class="flex justify-content-center">Add Packing List</h3>
+        <div class="grid">
+          <div class="field col">
+            <label for="firstname2">Doc. Date</label>
+            <p-calendar [(ngModel)]="packingList.docDate" name="docDate" dateFormat="dd-mm-yy" [showIcon]="true"
+              [showButtonBar]="true"></p-calendar>
+          </div>
+          <div class="field col">
+            <label for="lastname2">Packing List #</label>
+            <input type="text" pInputText [(ngModel)]="packingList.plNo" name="plNo" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="firstname1">Brands</label>
+          <p-chips [(ngModel)]="packingList.brandNames" separator="," name="brandNames" [showClear]="true"></p-chips>
+        </div>
+        <div class="field">
+          <label for="firstname1">Ship To</label>
+          <p-dropdown [options]="shipTo" [(ngModel)]="packingList.shipTo" name="shipTo" optionLabel="name"
+            [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+        </div>
+        <div class="field">
+          <label for="firstname1">Ship From</label>
+          <p-dropdown [options]="shipFrom" [(ngModel)]="packingList.shipFrom" name="shipFrom" optionLabel="name"
+            [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+        </div>
+        <div class="grid">
+          <div class="field col">
+            <label for="firstname2">Pack Qty</label>
+            <p-inputNumber [(ngModel)]="packingList.packQty" name="packQty" inputId="integeronly"></p-inputNumber>
+          </div>
+          <div class="field col">
+            <label for="lastname2">Qty</label>
+            <p-inputNumber [(ngModel)]="packingList.qty" name="qty" inputId="integeronly"></p-inputNumber>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="field col">
+            <label for="firstname2">Cartons</label>
+            <p-inputNumber [(ngModel)]="packingList.ctns" name="ctns" inputId="integeronly"></p-inputNumber>
+          </div>
+          <div class="field col">
+            <label for="lastname2">Pallets</label>
+            <p-inputNumber [(ngModel)]="packingList.plts" name="plts" inputId="integeronly"></p-inputNumber>
+          </div>
+        </div>
+        <div class="field">
+          <label for="firstname1">Weight</label>
+          <p-inputNumber [(ngModel)]="packingList.weight" name="weight" inputId="minmaxfraction" mode="decimal"
+            [minFractionDigits]="2" [maxFractionDigits]="3"></p-inputNumber>
+        </div>
+        <div class="formgroup flex flex-row justify-content-end gap-3">
+          <div class="field">
+            <button pButton pRipple type="submit" label="Create" icon="pi pi-pencil"
+              class="p-button-raised p-button-text"></button>
+          </div>
+          <div class="field">
+            <button pButton pRipple type="button" label="Update" icon="pi pi-replay"
+              class="p-button-raised p-button-text p-button-plain" (click)="updatePackingList()"></button>
+          </div>
+          <div class="field">
+            <button pButton pRipple type="button" label="Delete" icon="pi pi-times"
+              class="p-button-raised p-button-danger p-button-text" (click)="deletePackingList()"></button>
+          </div>
+          <div class="field">
+            <button pButton pRipple type="button" label="Clear" icon="pi pi-times"
+              class="p-button-raised p-button-danger p-button-text" (click)="clearForm()"></button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-8">
+      <p-card>
+        <h3 class="flex justify-content-center">Packing List</h3>
+        <div class="grid p-fluid">
+          <div class="col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <p-dropdown [options]="shipTo" [(ngModel)]="searchBy" name="searchBy" optionLabel="name"
+                  [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+                <label for="inputtext">Search By</label>
+              </span>
+            </div>
+
+          </div>
+          <div class="col-8">
+            <div class="field">
+              <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="searchByValue" name="searchByValue" /><br />
+                <label for="inputtext">Enter your value</label>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <p-table [value]="packingLists" selectionMode="single" [(selection)]="packingList" dataKey="key" [tableStyle]="{'min-width': '50rem'}"
+          (onRowSelect)="onRowSelect($event)">
+            <ng-template pTemplate="header">
+                <tr>
+                  <th>Packing List #</th>
+                  <th>Brands</th>
+                  <th>Ship To</th>
+                  <th>Country</th>
+                  <th>Quantity</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-packing>
+                <tr [pSelectableRow]="packing">
+                  <td>{{packing.plNo}}</td>
+                  <td>{{packing.brandNames}}</td>
+                  <td>{{packing.shipTo?.name}}</td>
+                  <td>{{packing.shipTo?.location}}</td>
+                  <td>{{packing.qty}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+          <!-- <p-table [value]="packingLists" selectionMode="single" [(selection)]="packingList" dataKey="key" (selectionChange)="selected($event)">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Packing List #</th>
+                <th>Ship From</th>
+                <th>Ship To</th>
+                <th>Quantity</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-packing>
+              <tr>
+                <td>{{packing.plNo}}</td>
+                <td>{{packing.shipFrom?.name}}</td>
+                <td>{{packing.shipTo?.name}}</td>
+                <td>{{packing.qty}}</td>
+              </tr>
+            </ng-template>
+          </p-table> -->
+        </div>
+      </p-card>
+    </div>
+
+  </div>
+</form>

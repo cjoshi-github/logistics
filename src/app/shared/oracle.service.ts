@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { Oracle } from './oracle.model';
+import { Oracle } from '../models/oracle.model';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 
 @Injectable({

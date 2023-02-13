@@ -18,3 +18,8 @@ export const environment = {
 // git remote -v
 // git push -f
 // git push origin master
+
+//Hosting Github
+//git commit -m "Routing Changed"
+//ng build --output-path docs --base-href "Project-Name"
+//git push -f

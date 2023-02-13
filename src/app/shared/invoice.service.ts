@@ -4,7 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { Invoice } from './invoice.model';
+import { Invoice } from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root',
