@@ -20,7 +20,7 @@ export const environment = {
 // git push origin master
 
 //Hosting Github
+//ng build --output-path docs --base-href ""
 //git add *
 //git commit -m ""
-//ng build --output-path docs --base-href "logisitics-primeng"
 //git push -f
