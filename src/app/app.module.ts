@@ -39,10 +39,11 @@ import { PackingComponent } from './packing/packing.component';
 import { OracleComponent } from './oracle/oracle.component';
 import {RatingModule} from 'primeng/rating';
 import {TreeTableModule} from 'primeng/treetable';
-import {TreeNode} from 'primeng/api';
+import {MessageService, TreeNode} from 'primeng/api';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { HeaderComponent } from './header/header.component';
 import { ShipmentComponent } from './shipment/shipment.component';
+import {ToastModule} from 'primeng/toast';
 
 
 //*****************Component**************************/
@@ -89,9 +90,10 @@ import { ShipmentComponent } from './shipment/shipment.component';
     TableModule,  
     RatingModule,
     TreeTableModule,
+    ToastModule,
     
   ],
-  providers: [],
+  providers: [MessageService],
   
   bootstrap: [AppComponent],
 })
