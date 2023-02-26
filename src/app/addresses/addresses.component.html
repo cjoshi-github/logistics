@@ -1,0 +1,13 @@
+<form #form="ngForm" (ngSubmit)="create(form)">
+    <input type="text" name="name" [(ngModel)]="shipper.name">
+    <input type="text" name="addressLine1" [(ngModel)]="shipper.addressLine1">
+    <input type="text" name="addressLine2" [(ngModel)]="shipper.addressLine2">
+    <input type="text" name="location" [(ngModel)]="shipper.location">
+    <input type="text" name="countryName" [(ngModel)]="shipper.countryName">
+    <input type="text" name="vatNo" [(ngModel)]="shipper.vatNo">
+    <input type="text" name="contactPerson" [(ngModel)]="shipper.contactPerson">
+    <input type="text" name="contactNo" [(ngModel)]="shipper.contactNo">
+    <input type="submit">
+</form>
+
+{{form.value | json}}

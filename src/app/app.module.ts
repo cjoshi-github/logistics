@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 //*****************Firebase**************************/
 
@@ -44,6 +43,11 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { HeaderComponent } from './header/header.component';
 import { ShipmentComponent } from './shipment/shipment.component';
 import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import { AddressesComponent } from './addresses/addresses.component';
+import { TestComponent } from './test/test.component';
+import {PickListModule} from 'primeng/picklist';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 
 //*****************Component**************************/
@@ -55,7 +59,9 @@ import {ToastModule} from 'primeng/toast';
     OracleComponent,
     InvoiceComponent,
     HeaderComponent,
-    ShipmentComponent
+    ShipmentComponent,
+    AddressesComponent,
+    TestComponent,
   ],
   imports: [
     //core
@@ -70,7 +76,6 @@ import {ToastModule} from 'primeng/toast';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
 
     //Component
     ButtonModule,
@@ -91,6 +96,9 @@ import {ToastModule} from 'primeng/toast';
     RatingModule,
     TreeTableModule,
     ToastModule,
+    DialogModule,
+    PickListModule,
+    OverlayPanelModule,
     
   ],
   providers: [MessageService],

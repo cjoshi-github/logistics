@@ -2,11 +2,12 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { map } from 'rxjs/internal/operators/map';
 import { Packing } from '../models/packing.model';
 import { NgForm } from '@angular/forms';
-import { Address, Shipper } from '../utils/shipFrom.utils';
 import { Utils } from '../utils/date.utils';
 import { PackingService } from '../shared/packing.service';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { AddressService } from '../shared/address.service';
+import { Address } from '../models/address.model';
 
 @Component({
   selector: 'app-packing',
@@ -22,25 +23,20 @@ export class PackingComponent {
 
   constructor(
     private database: PackingService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private ship: AddressService 
   ) {
-    this.shipFrom = new Shipper().getShipFrom();
-    this.shipTo = new Shipper().getShipFrom();
+    ship.getAll().subscribe(s=> {
+      this.shipTo = s;
+      this.shipFrom = s;
+    })
     this.readPackingLists();
   }
 
   readPackingLists() {
-    this.database
-      .getAll()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe((data) => {
-        this.packingLists = data;
-      });
+    this.database.getAll().subscribe(data => {
+      this.packingLists = data;
+    })
   }
 
   createPackingList(form: NgForm) {
@@ -58,12 +54,12 @@ export class PackingComponent {
   }
 
   deletePackingList() {
-    this.database.delete(String(this.packingList.key));
+    this.database.delete(this.packingList.key);
     this.clearForm();
   }
 
   updatePackingList() {
-    this.database.update(String(this.packingList.key), this.packingList);
+    this.database.update(this.packingList.key, this.packingList);
     this.messageService.add({
       severity: 'info',
       summary: 'Updated',
@@ -81,7 +77,7 @@ export class PackingComponent {
   }
 
   onConfirm() {
-    this.database.delete(String(this.packingList.key));
+    this.database.delete(this.packingList.key);
     this.messageService.clear('c');
     this.messageService.add({
       severity: 'error',

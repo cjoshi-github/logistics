@@ -1,0 +1,8 @@
+<div *ngFor="let oracle of oracles">
+    <h2>{{ oracle.test }}</h2>
+    <ul>
+        <li *ngFor="let packing of oracle.packings">
+            {{ packing.test }}
+        </li>
+    </ul>
+</div>

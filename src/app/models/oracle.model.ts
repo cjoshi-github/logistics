@@ -1,13 +1,14 @@
 import { Packing } from "./packing.model";
 
 export class Oracle {
-    key?: String | null;
-    oracleNo?: String;
-    packinglists?: String[];
+    key?: string | null;
+    oracleNo?: string;
+    packinglists?: string[];
     amount?: number;
     vWeight?: number;
     cbm?: number;
-    disc?: String;
-    itemType?: String;
+    disc?: string;
+    itemType?: string;
     isInvoiceGenerate?: boolean;
+    packings?: Packing[];
 }

@@ -3,27 +3,27 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
-import { Packing } from '../models/packing.model';
-import { getDatabase, ref, onValue } from 'firebase/database';
 import { map } from 'rxjs';
+import { Address } from '../models/address.model';
+import { Packing } from '../models/packing.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PackingService {
-  private readonly dbPath = '/packing';
-  private readonly packingLists: AngularFireList<Packing>;
+export class AddressService {
+  private readonly dbPath = '/addresses';
+  private readonly addresses: AngularFireList<Address>;
 
   constructor(private db: AngularFireDatabase) {
-    this.packingLists = db.list(this.dbPath);
+    this.addresses = db.list(this.dbPath);
   }
 
   getById(id: string) {
-    let packing = this.db.object(this.dbPath+"/"+id);
+    let packing = this.db.object(this.dbPath + '/' + id);
     return packing;
   }
   getAll() {
-    return this.packingLists
+    return this.addresses
     .snapshotChanges()
     .pipe(
       map((changes) =>
@@ -33,18 +33,18 @@ export class PackingService {
   }
 
   create(packing: Packing): any {
-    return this.packingLists.push(packing);
+    return this.addresses.push(packing);
   }
 
   update(key: string, value: any): Promise<void> {
-    return this.packingLists.update(key, value);
+    return this.addresses.update(key, value);
   }
 
   delete(key: string): Promise<void> {
-    return this.packingLists.remove(key);
+    return this.addresses.remove(key);
   }
 
   deleteAll(): Promise<void> {
-    return this.packingLists.remove();
+    return this.addresses.remove();
   }
 }

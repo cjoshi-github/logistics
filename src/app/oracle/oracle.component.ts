@@ -31,15 +31,9 @@ export class OracleComponent {
     this.readOracleLists();
   }
   readPackingLists() {
-    this.packingService.getAll().snapshotChanges()
-    .pipe(
-      map((changes) =>
-        changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))  
-      )
-    )
-    .subscribe((data) => {
+    this.packingService.getAll().subscribe(data=> {
       this.packingLists = data;
-    }); 
+    })
   }
   readOracleLists() {
     this.oracleService.getAll().snapshotChanges()

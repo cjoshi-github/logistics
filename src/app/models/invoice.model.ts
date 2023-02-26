@@ -1,10 +1,10 @@
 export class Invoice {
-    key?: String;
-    no?: String;
+    key?: string;
+    no?: string;
     date?: Date;
-    oracles?: String[];
-    boeNo?: String;
-    declarationNo?: String;
-    remarks?: String;
+    oracles?: string[];
+    boeNo?: string;
+    declarationNo?: string;
+    remarks?: string;
     isTruckArranged?: boolean;
 }
