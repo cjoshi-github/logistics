@@ -16,17 +16,37 @@ export class TestComponent {
   async ngOnInit() {
     this.packings = await this.firebaseService.getPackings(); //getting sync packing list 
     this.oracles = await this.firebaseService.getOracles();   ////getting sync oracle list
+    this.oracles = this.getPackingLists(this.oracles,this.packings);
 
     // Filter packings for each oracle based on packingIds array
-    this.oracles.forEach(oracle => {
+    // this.oracles.forEach(oracle => {
+
+
+    //   oracle.packings = []; //creating new filed called packing inside the each oracle 
+      
+    //   oracle.pl.forEach(id => {
+
+    //     const packing = this.packings.find(p => p.id === id);
+
+    //     if (packing) {
+    //       oracle.packings.push(packing);
+    //     }
+
+    //   });
+
+    // });
+  }
+
+  getPackingLists(oracles, packings) {
+    oracles.forEach(oracle => {
 
 
       oracle.packings = []; //creating new filed called packing inside the each oracle 
       
       oracle.pl.forEach(id => {
 
-        const packing = this.packings.find(p => p.id === id);
-        
+        const packing = packings.find(p => p.id === id);
+
         if (packing) {
           oracle.packings.push(packing);
         }
@@ -34,5 +54,6 @@ export class TestComponent {
       });
 
     });
+    return oracles;
   }
 }

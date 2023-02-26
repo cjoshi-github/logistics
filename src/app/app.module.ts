@@ -48,6 +48,7 @@ import { AddressesComponent } from './addresses/addresses.component';
 import { TestComponent } from './test/test.component';
 import {PickListModule} from 'primeng/picklist';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { Test2Component } from './test2/test2.component';
 
 
 //*****************Component**************************/
@@ -62,6 +63,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ShipmentComponent,
     AddressesComponent,
     TestComponent,
+    Test2Component,
   ],
   imports: [
     //core

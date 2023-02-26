@@ -8,6 +8,7 @@ import { PackingComponent } from './packing/packing.component';
 import { ShipmentComponent } from './shipment/shipment.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { TestComponent } from './test/test.component';
+import { Test2Component } from './test2/test2.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 't', component: TutorialsListComponent },
   { path: 'add-t', component: AddTutorialComponent },
   { path: 'test', component: TestComponent },
+  { path: 'test2', component: Test2Component },
 
 ];
 
