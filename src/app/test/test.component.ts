@@ -24,7 +24,9 @@ export class TestComponent {
       oracle.packings = []; //creating new filed called packing inside the each oracle 
       
       oracle.pl.forEach(id => {
+
         const packing = this.packings.find(p => p.id === id);
+        
         if (packing) {
           oracle.packings.push(packing);
         }
