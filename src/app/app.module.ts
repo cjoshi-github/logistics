@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 //*****************Component**************************/
 
 import { ButtonModule } from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { TimelineModule } from 'primeng/timeline';
@@ -49,6 +50,7 @@ import { TestComponent } from './test/test.component';
 import {PickListModule} from 'primeng/picklist';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { Test2Component } from './test2/test2.component';
+import { Test3Component } from './test3/test3.component';
 
 
 //*****************Component**************************/
@@ -64,6 +66,7 @@ import { Test2Component } from './test2/test2.component';
     AddressesComponent,
     TestComponent,
     Test2Component,
+    Test3Component,
   ],
   imports: [
     //core
@@ -73,6 +76,7 @@ import { Test2Component } from './test2/test2.component';
     RippleModule,
     FormsModule,
     ReactiveFormsModule,
+    DividerModule,
 
     // Firebase
     AngularFireModule.initializeApp(environment.firebase),

@@ -1,8 +1,26 @@
-<div *ngFor="let oracle of oracles">
-    <h2>{{ oracle.test }}</h2>
-    <ul>
-        <li *ngFor="let packing of oracle.packings">
-            {{ packing.test }}
-        </li>
-    </ul>
+<div class="card">
+    <p-table [value]="packings" rowGroupMode="rowspan" groupRowsBy="oracleNo"[tableStyle]="{'min-width': '75rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:3rem">#</th>
+                <th>Oracle ID</th>
+                <th>Packing List ID</th>
+                <th>Packing List Disc.</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-packing let-rowIndex="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
+            <tr>
+                <td>{{rowIndex+1}}</td>
+                <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                    <span class="font-bold ml-2">{{packing.oracleNo}}</span>
+                </td>
+                <td>
+                    {{packing.id}}
+                </td>
+                <td>
+                    {{packing.test}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

@@ -34,6 +34,8 @@ export class PackingComponent {
   }
 
   readPackingLists() {
+    console.log(JSON.parse(localStorage.getItem("packing")))
+    
     this.database.getAll().subscribe(data => {
       this.packingLists = data;
     })
@@ -50,6 +52,9 @@ export class PackingComponent {
       detail: 
           'Packing List Created...',
     });
+    this.packingLists.push(form.value)
+    localStorage.setItem("packing",JSON.stringify(this.packingLists));
+    
     this.clearForm();
   }
 
